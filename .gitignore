@@ -1,0 +1,21 @@
+# Local .terraform directories
+.terraform/
+
+# Terraform lock file (provider versions) — ignore if you want fully dynamic versions
+# If you want reproducible builds, you can commit it instead.
+.terraform.lock.hcl
+
+# State files (contain secrets!)
+terraform.tfstate
+terraform.tfstate.*
+*.tfstate
+*.tfstate.*
+
+# Crash logs
+crash.log
+crash.*.log
+
+# CLI config
+.terraformrc
+terraform.rc
+
