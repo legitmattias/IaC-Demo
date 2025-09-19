@@ -94,7 +94,10 @@ resource "openstack_networking_port_v2" "iac_port" {
   name               = "iac-port"
   network_id         = openstack_networking_network_v2.iac_network.id
   admin_state_up     = true
-  security_group_ids = [openstack_networking_secgroup_v2.iac_secgroup.id]
+  security_group_ids = [
+    openstack_networking_secgroup_v2.iac_secgroup.id,
+    openstack_networking_secgroup_v2.web_extra.id
+    ]
 }
 
 # -----------------------------------------------------------------------------
@@ -125,7 +128,8 @@ resource "openstack_compute_instance_v2" "iac_server" {
   image_name      = "Ubuntu server 24.04.3 autoupgrade"
   flavor_id       = "c1-r1-d10"
   key_pair        = "mu222cu-keypair"
-  security_groups = [openstack_networking_secgroup_v2.iac_secgroup.name]
+
+  # security_groups here was deleted since port controls it.
 
   network {
     port = openstack_networking_port_v2.iac_port.id
