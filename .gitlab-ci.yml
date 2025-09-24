@@ -38,7 +38,6 @@ configure-application:
   image:
     name: gitlab.lnu.se:5050/dipeab/2dv013-ht24-ci/myansible:latest
   variables:
-    # make sure Ansible uses the repo-root config that points to your inventory/roles
     ANSIBLE_CONFIG: ./ansible.cfg
   before_script:
     - mkdir -p ~/.ssh && chmod 700 ~/.ssh
@@ -46,6 +45,6 @@ configure-application:
     - printf "%s\n" "$STAGING_KEY" > ~/.ssh/id_ci
     - chmod 600 ~/.ssh/id_ci
     # optional safety; the ansible.cfg already disables host key checking
-    # - printf "Host *\n  StrictHostKeyChecking no\n" > ~/.ssh/config
+    - printf "Host *\n  StrictHostKeyChecking no\n" > ~/.ssh/config
   script:
     - ansible-playbook -i deploy/ansible/inventories/prod/hosts.ini deploy/ansible/playbooks/web.yml --extra-vars="ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_ci"
