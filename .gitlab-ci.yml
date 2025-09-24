@@ -1,0 +1,15 @@
+stages:
+  - build
+  - test
+  - staging
+
+build-job:
+  stage: build
+  script:
+    - echo "Building the project..."
+    - cd app
+    - tar -zcvf index.html.tar.gz ./index.html
+    - cd ..
+    - mkdir target
+    - mv app/index.html.tar.gz target/
+    - echo "Build completed"
