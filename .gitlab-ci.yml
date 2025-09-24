@@ -48,5 +48,4 @@ configure-application:
     # optional safety; the ansible.cfg already disables host key checking
     # - printf "Host *\n  StrictHostKeyChecking no\n" > ~/.ssh/config
   script:
-    - ansible-playbook deploy/ansible/playbooks/web.yml \
-        --extra-vars="ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_ci"
+    - ansible-playbook -i deploy/ansible/inventories/prod/hosts.ini deploy/ansible/playbooks/web.yml --extra-vars="ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_ci"
