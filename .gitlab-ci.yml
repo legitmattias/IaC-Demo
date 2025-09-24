@@ -24,6 +24,7 @@ test-job1:
     - echo "Testing the project and go to sleep for 2 seconds..."
     - sleep 2
     - echo "Test-job1 completed"
+
 test-job2:
   stage: test
   script:
@@ -31,3 +32,8 @@ test-job2:
     - tar -xvzf target/index.html.tar.gz -C testing-folder/
     - chmod u+x test/test-index-contains.sh
     - ./test/test-index-contains.sh
+  
+configure-application:
+  stage: staging
+  script:
+    - ansible-playbook deploy/ansible/playbooks/web.yml
