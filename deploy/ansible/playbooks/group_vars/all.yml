@@ -1,0 +1,4 @@
+web_listen_port: 8080
+repo_root: "{{ playbook_dir | dirname | dirname | dirname }}"
+app_src: "{{ repo_root }}/app/"
+
